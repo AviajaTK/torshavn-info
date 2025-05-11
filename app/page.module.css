@@ -1,0 +1,67 @@
+.container {
+  width: 100%;
+  height: 100vh;
+  max-width: 100%;
+  background-color: #1a1f35;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.buttonContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  align-items: center;
+  width: 100%;
+  max-width: 768px;
+  padding: 0 20px;
+}
+
+.button {
+  width: 100%;
+  max-width: 500px;
+  padding: 20px;
+  border: none;
+  border-radius: 15px;
+  font-size: 24px;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.button:hover {
+  transform: scale(1.05);
+}
+
+.faroese {
+  background-color: #64a7f0;
+  color: black;
+}
+
+.faroese:hover {
+  background-color: #4b8ed7;
+}
+
+.faroese:active {
+  background-color: #3275be;
+}
+
+.foreign {
+  background-color: #e9c9ed;
+  color: black;
+}
+
+.foreign:hover {
+  background-color: #d0b0d4;
+}
+
+.foreign:active {
+  background-color: #b797bb;
+}
+
+.fadeOut {
+  opacity: 0;
+  transition: opacity 0.5s ease-out;
+} 
