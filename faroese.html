@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="fo">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tórshavnar Kommuna - Føroysk síða</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-color: #1a1f35;
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 800px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .button-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .button {
+      padding: 20px;
+      border: none;
+      border-radius: 15px;
+      font-size: 20px;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.3s ease;
+      min-height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: black;
+    }
+
+    .button:hover {
+      transform: scale(1.02);
+    }
+
+    .tk-buss {
+      background-color: #90EE90;
+    }
+
+    .tk-buss:hover, .tk-buss:active {
+      background-color: #5ab55a;
+    }
+
+    .kommunalar {
+      background-color: #FFE4B5;
+    }
+
+    .kommunalar:hover, .kommunalar:active {
+      background-color: #d4ac6d;
+    }
+
+    .kunning-tk {
+      background-color: #B5E6D8;
+    }
+
+    .kunning-tk:hover, .kunning-tk:active {
+      background-color: #7fb3a3;
+    }
+
+    .kunning-uttanfyri {
+      background-color: #E6D8E6;
+    }
+
+    .kunning-uttanfyri:hover, .kunning-uttanfyri:active {
+      background-color: #b396b3;
+    }
+
+    .mist-funnid {
+      background-color: #FFF0DB;
+    }
+
+    .mist-funnid:hover, .mist-funnid:active {
+      background-color: #d4b889;
+    }
+
+    .tiltok {
+      background-color: #B5D8E6;
+    }
+
+    .tiltok:hover, .tiltok:active {
+      background-color: #7fa7b3;
+    }
+
+    .enda {
+      background-color: #E6B5D8;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .enda:hover, .enda:active {
+      background-color: #b37f9e;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="button-grid">
+      <button class="button tk-buss" onclick="handleClick('tk-buss')">TK Buss</button>
+      <button class="button kommunalar" onclick="handleClick('kommunalar')">Kommunalar<br>Tænastur</button>
+      <button class="button kunning-tk" onclick="handleClick('kunning-tk')">Kunning í TK</button>
+      <button class="button kunning-uttanfyri" onclick="handleClick('kunning-uttanfyri')">Kunning uttanfyri TK</button>
+      <button class="button mist-funnid" onclick="handleClick('mist-funnid')">Mist & Funnið</button>
+      <button class="button tiltok" onclick="handleClick('tiltok')">Tiltøk</button>
+    </div>
+    <button class="button enda" onclick="handleClick('enda')">Enda</button>
+  </div>
+
+  <script>
+    function handleClick(type) {
+      switch(type) {
+        case 'enda':
+          window.location.href = 'index.html';
+          break;
+        default:
+          window.location.href = type + '.html';
+      }
+    }
+  </script>
+</body>
+
+</html>

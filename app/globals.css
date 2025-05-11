@@ -1,0 +1,157 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background-color: #1a1f35;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+.button {
+  width: 100%;
+  padding: 1.5rem 1rem;
+  border: none;
+  border-radius: 0.75rem;
+  font-size: 1.25rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+/* Main menu buttons */
+.button-faroese {
+  background-color: #64a7f0;
+  color: black;
+}
+.button-faroese:hover {
+  background-color: #4b8ed7;
+}
+
+.button-foreign {
+  background-color: #e9c9ed;
+  color: black;
+}
+.button-foreign:hover {
+  background-color: #d0b0d4;
+}
+
+/* Faroese page buttons */
+.button-tk-buss {
+  background-color: #90EE90;
+  color: black;
+}
+.button-tk-buss:hover {
+  background-color: #5ab55a;
+}
+
+.button-kommunalar {
+  background-color: #FFE4B5;
+  color: black;
+}
+.button-kommunalar:hover {
+  background-color: #d4ac6d;
+}
+
+.button-kunning-tk {
+  background-color: #B5E6D8;
+  color: black;
+}
+.button-kunning-tk:hover {
+  background-color: #7fb3a3;
+}
+
+.button-kunning-uttanfyri {
+  background-color: #E6D8E6;
+  color: black;
+}
+.button-kunning-uttanfyri:hover {
+  background-color: #b396b3;
+}
+
+.button-tiltok {
+  background-color: #B5D8E6;
+  color: black;
+}
+.button-tiltok:hover {
+  background-color: #7fa7b3;
+}
+
+.button-annad {
+  background-color: #FFF0DB;
+  color: black;
+}
+.button-annad:hover {
+  background-color: #d4b889;
+}
+
+/* Foreign page buttons */
+.button-tax-free {
+  background-color: #eaf6f5;
+  color: black;
+}
+.button-tax-free:hover {
+  background-color: #b3d4d1;
+}
+
+.button-ssl {
+  background-color: #FFD8CC;
+  color: black;
+}
+.button-ssl:hover {
+  background-color: #d4a494;
+}
+
+.button-enda {
+  background-color: #FF3366;
+  color: white;
+}
+.button-enda:hover {
+  background-color: #cc294f;
+}
+
+.button-sletta {
+  background-color: #E6B5D8;
+  color: black;
+}
+.button-sletta:hover {
+  background-color: #b37f9e;
+}
+
+.button-foreign-enda {
+  background-color: #FF3366;
+  color: white;
+}
+.button-foreign-enda:hover {
+  background-color: #cc294f;
+}
+
+/* Layout */
+.container {
+  width: 100%;
+  max-width: 800px;
+  padding: 1rem;
+  margin: 0 auto;
+}
+
+.button-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.button-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+main {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
