@@ -19,7 +19,7 @@ export default function Home() {
           onClick={() => router.push('/foreign')}
           className="button button-foreign"
         >
-          Útlendingur
+          Ferðafólk
         </button>
       </div>
     </main>

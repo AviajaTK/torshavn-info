@@ -74,7 +74,7 @@ export async function getVisitorLogs(startDate?: string, endDate?: string) {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${process.env.FLOWCORE_API_KEY}`,
+        "Authorization": `Bearer ${process.env.FLOWCORE_API_KEY_XYZ123}`,
       },
     });
 

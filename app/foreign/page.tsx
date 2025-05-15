@@ -9,7 +9,7 @@ export default function ForeignPage() {
 
   const handleButtonClick = async (queryType: string) => {
     try {
-      const result = await logVisitorQuery('Útlendingur', queryType);
+      const result = await logVisitorQuery('Ferðafólk', queryType);
       if (result.success) {
         if (queryType === 'Sletta seinasta input') {
           toast.success('Input slettað!');
@@ -84,7 +84,7 @@ export default function ForeignPage() {
             onClick={() => handleButtonClick('Børn & Ung (0-17 ár)')}
             style={{
               backgroundColor: '#9ab2d6',
-              color: 'white',
+              color: 'black',
               padding: '0.5rem 1rem',
               border: 'none',
               borderRadius: '4px',
@@ -98,7 +98,7 @@ export default function ForeignPage() {
             onClick={() => handleButtonClick('Ung ferðafólk (18-29 ár)')}
             style={{
               backgroundColor: '#9ab2d6',
-              color: 'white',
+              color: 'black',
               padding: '0.5rem 1rem',
               border: 'none',
               borderRadius: '4px',
@@ -112,7 +112,7 @@ export default function ForeignPage() {
             onClick={() => handleButtonClick('Familjur & Pør (30-44 ár)')}
             style={{
               backgroundColor: '#9ab2d6',
-              color: 'white',
+              color: 'black',
               padding: '0.5rem 1rem',
               border: 'none',
               borderRadius: '4px',
@@ -126,7 +126,7 @@ export default function ForeignPage() {
             onClick={() => handleButtonClick('Empty nesters (45-59 ár)')}
             style={{
               backgroundColor: '#9ab2d6',
-              color: 'white',
+              color: 'black',
               padding: '0.5rem 1rem',
               border: 'none',
               borderRadius: '4px',
@@ -140,7 +140,7 @@ export default function ForeignPage() {
             onClick={() => handleButtonClick('Eftirlønarferðafólk (60+ ár)')}
             style={{
               backgroundColor: '#9ab2d6',
-              color: 'white',
+              color: 'black',
               padding: '0.5rem 1rem',
               border: 'none',
               borderRadius: '4px',

@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { logVisitorQuery } from '@/app/utils/flowcore';
 
 // Define the types for our logging data
-type VisitorType = 'Føroyingur' | 'Útlendingur';
+type VisitorType = 'Føroyingur' | 'Ferðafólk';
 type QueryType = 
   | 'TK Buss'
   | 'Kommunalar Tænastur'
