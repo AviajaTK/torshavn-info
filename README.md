@@ -4,7 +4,7 @@
 This app helps track visitor queries and age ranges in Tórshavn, using Flowcore for data logging.
 
 ## Features
-- Log visitor queries (Føroyingur/Útlendingur)
+- Log visitor queries (Føroyingur/Ferðafólk)
 - Track age ranges
 - Admin dashboard for viewing logs
 - Export to CSV
@@ -36,4 +36,8 @@ This app helps track visitor queries and age ranges in Tórshavn, using Flowcore
 - Three-layer architecture
 - Server-side API routes
 - Client-side components
-- Flowcore data logging 
+- Flowcore data logging
+
+---
+
+_Trigger Vercel deployment_
