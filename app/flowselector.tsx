@@ -13,7 +13,7 @@ type FlowScreen = {
 const startScreen: FlowScreen = {
   options: [
     { label: 'Føroyingur', nextScreen: 'citizen' },
-    { label: 'Útlendingur', nextScreen: 'foreigner' },
+    { label: 'Ferðafólk', nextScreen: 'foreigner' },
   ],
 };
 
@@ -44,7 +44,7 @@ const foreignerScreen: FlowScreen = {
 function getColorClass(label: string): string {
   const map: Record<string, string> = {
     'Føroyingur': 'bg-blue-400',
-    'Útlendingur': 'bg-pink-200',
+    'Ferðafólk': 'bg-pink-200',
     'TK Buss': 'bg-green-300',
     'Kommunalar Tænastur': 'bg-yellow-200',
     'Kunning í TK': 'bg-cyan-200',
