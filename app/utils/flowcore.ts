@@ -96,7 +96,7 @@ export async function getVisitorLogs(startDate?: string, endDate?: string) {
     console.error("Error fetching visitor logs:", error);
     return {
       success: false,
-      error: error instanceof Error ? error.message : 'Unknown error occurred'
+      error: error instanceof Error ? (error.stack || error.message) : JSON.stringify(error)
     };
   }
 }
