@@ -12,7 +12,7 @@ export default function Home() {
           onClick={() => router.push('/faroese')}
           className="button button-faroese"
         >
-          Føroyingur
+          Borgari
         </button>
         <div style={{ height: '1.5rem' }} />
         <button

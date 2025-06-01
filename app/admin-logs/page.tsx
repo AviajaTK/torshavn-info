@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 
-const VISITOR_TYPES = ['All', 'Føroyingur', 'Ferðafólk'];
+const VISITOR_TYPES = ['All', 'Borgari', 'Ferðafólk'];
 const QUERY_TYPES = [
   'All',
   'TK Buss',

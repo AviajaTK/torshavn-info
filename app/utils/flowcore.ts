@@ -69,6 +69,8 @@ export async function getVisitorLogs(startDate?: string, endDate?: string) {
 
   try {
     console.log('Attempting to fetch visitor logs from:', url);
+    // Debug: Log the API key (remove after debugging!)
+    console.log('FLOWCORE_API_KEY_XYZ123:', process.env.FLOWCORE_API_KEY_XYZ123);
     // --- REAL FLOWCORE API CALL ---
     const response = await fetch(url, {
       method: "GET",
