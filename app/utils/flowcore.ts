@@ -16,7 +16,7 @@ const flowcoreClient = new MockFlowcoreClient();
 
 export async function logVisitorQuery(visitorType: string, queryType: string) {
   // TODO: Replace the placeholder below with your actual webhook URL from Flowcore
-  const url = "https://webhook.api.flowcore.io/event/aviajatk/4ca9b13b-c4b9-43f0-9a05-d97ef5215561/visitor-log/visitor-action?key=00707fd0-4637-488b-997b-a8dad00707fd0-4637-488b-997b-a8dad6cef0ec6cef0ec";
+  const url = "https://webhook.api.flowcore.io/event/aviajatk/4ca9b13b-c4b9-43f0-9a05-d97ef5215561/visitor-log/visitor-action?key=022df4de-5279-4b56-9d87-05ad81548e7c";
   const payload = {
     visitorType,
     queryType,
