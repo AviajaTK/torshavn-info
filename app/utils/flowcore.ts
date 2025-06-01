@@ -15,7 +15,8 @@ class MockFlowcoreClient {
 const flowcoreClient = new MockFlowcoreClient();
 
 export async function logVisitorQuery(visitorType: string, queryType: string) {
-  const url = "https://webhook.api.flowcore.io/event/aviajatk/4ca9b13b-c4b9-43f0-9a05-d97ef5215561/visitor-log/visitor-action?key=775fcdc4-b45a-408c-aa97-c3e680641f95";
+  // TODO: Replace the placeholder below with your actual webhook URL from Flowcore
+  const url = https://webhook.api.flowcore.io/event/aviajatk/4ca9b13b-c4b9-43f0-9a05-d97ef5215561/visitor-log/visitor-action?key=00707fd0-4637-488b-997b-a8dad00707fd0-4637-488b-997b-a8dad6cef0ec6cef0ec";
   const payload = {
     visitorType,
     queryType,
@@ -49,7 +50,7 @@ export async function logVisitorQuery(visitorType: string, queryType: string) {
     if (error instanceof TypeError && error.message.includes('fetch')) {
       console.error('Network error - please check your internet connection and Flowcore service availability');
     }
-    return { success: false, error: error.message };
+    return { success: false, error: error instanceof Error ? error.message : String(error) };
   }
 }
 
