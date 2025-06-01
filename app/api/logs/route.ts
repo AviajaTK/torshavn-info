@@ -31,7 +31,8 @@ export async function GET(request: Request) {
     return NextResponse.json(
       { 
         success: false, 
-        message: error instanceof Error ? error.message : 'Failed to fetch visitor logs' 
+        message: error instanceof Error ? error.message : 'Failed to fetch visitor logs',
+        error: JSON.stringify(error)
       },
       { status: 500 }
     );
