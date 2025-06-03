@@ -15,8 +15,13 @@ class MockFlowcoreClient {
 const flowcoreClient = new MockFlowcoreClient();
 
 export async function logVisitorQuery(visitorType: string, queryType: string) {
-  // TODO: Replace the placeholder below with your actual webhook URL from Flowcore
-  const url = "https://webhook.api.flowcore.io/event/aviajatk/4ca9b13b-c4b9-43f0-9a05-d97ef5215561/visitor-log/visitor-action?key=022df4de-5279-4b56-9d87-05ad81548e7c";
+  const apiKey = process.env.NEXT_PUBLIC_FLOWCORE_API_KEY;
+  if (!apiKey) {
+    console.error('Flowcore API key is not configured');
+    return { success: false, error: 'API key not configured' };
+  }
+
+  const url = `https://webhook.api.flowcore.io/event/aviajatk/4ca9b13b-c4b9-43f0-9a05-d97ef5215561/visitor-log/visitor-action?key=${apiKey}`;
   const payload = {
     visitorType,
     queryType,
@@ -56,50 +61,37 @@ export async function logVisitorQuery(visitorType: string, queryType: string) {
 
 // Add read model functionality
 export async function getVisitorLogs(startDate?: string, endDate?: string) {
-  const baseUrl = "https://api.flowcore.io/read/aviajatk/visitor-logs";
-  const queryParams = new URLSearchParams();
-  
-  if (startDate) {
-    queryParams.append('startDate', startDate);
-  }
-  if (endDate) {
-    queryParams.append('endDate', endDate);
-  }
-
-  const url = `${baseUrl}?${queryParams.toString()}`;
-
-  try {
-    console.log('Attempting to fetch visitor logs from:', url);
-    // Debug: Log the API key (remove after debugging!)
-    console.log('FLOWCORE_API_KEY_XYZ123:', process.env.FLOWCORE_API_KEY_XYZ123);
-    // --- REAL FLOWCORE API CALL ---
-    const response = await fetch(url, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${process.env.FLOWCORE_API_KEY_XYZ123}`,
-      },
-    });
-
-    console.log('Flowcore read model response status:', response.status);
-    const data = await response.json();
-    console.log('Flowcore read model response:', data);
-
-    if (!response.ok) {
-      throw new Error(`Failed to fetch visitor logs: ${response.status} ${JSON.stringify(data)}`);
+  // Simulate visitor log data
+  const logs = [
+    {
+      visitorType: "Føroyingur",
+      queryType: "Kunning í TK",
+      timestamp: "2025-06-02T14:25:00Z",
+      id: "log1"
+    },
+    {
+      visitorType: "Útlendingur",
+      queryType: "SSL",
+      timestamp: "2025-06-02T15:45:00Z",
+      id: "log2"
+    },
+    {
+      visitorType: "Føroyingur",
+      queryType: "TK Buss",
+      timestamp: "2025-06-03T09:10:00Z",
+      id: "log3"
     }
+  ];
 
-    return {
-      success: true,
-      data: data
-    };
-  } catch (error) {
-    console.error("Error fetching visitor logs:", error);
-    return {
-      success: false,
-      error: error instanceof Error ? (error.stack || error.message) : JSON.stringify(error)
-    };
-  }
+  return {
+    success: true,
+    data: {
+      logs,
+      total: logs.length,
+      page: 1,
+      pageSize: 50
+    }
+  };
 }
 
 // Add type for visitor log data
