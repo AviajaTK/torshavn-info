@@ -16,6 +16,28 @@ const QUERY_TYPES = [
   'Tax Free',
 ];
 
+// fallback mock data
+const fallbackLogs = [
+  {
+    id: 'log1',
+    visitorType: 'Føroyingur',
+    queryType: 'Kunning í TK',
+    timestamp: '2025-06-02T14:25:00Z',
+  },
+  {
+    id: 'log2',
+    visitorType: 'Útlendingur',
+    queryType: 'SSL',
+    timestamp: '2025-06-02T15:45:00Z',
+  },
+  {
+    id: 'log3',
+    visitorType: 'Føroyingur',
+    queryType: 'TK Buss',
+    timestamp: '2025-06-03T09:10:00Z',
+  },
+];
+
 export default function AdminLogs() {
   const [logs, setLogs] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
@@ -37,7 +59,9 @@ export default function AdminLogs() {
       if (!data.success) throw new Error(data.message);
       setLogs(data.logs || []);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to fetch logs');
+      console.warn('Fetch failed, using fallback logs');
+      setError('Falling back to offline mode. Showing sample data.');
+      setLogs(fallbackLogs);
     } finally {
       setLoading(false);
     }
@@ -133,4 +157,4 @@ export default function AdminLogs() {
       </div>
     </div>
   );
-} 
+}

@@ -1,88 +1,51 @@
-// TODO: Import actual Flowcore SDK when available
-// import { FlowcoreClient } from '@flowcore/sdk';
+// --- MOCKED VERSION FOR EXAM DEMO ---
 
-// Mock Flowcore client for now
-class MockFlowcoreClient {
-  async logQuery(data: any) {
-    // Simulate network delay
-    await new Promise(resolve => setTimeout(resolve, 100));
-    console.log('Flowcore log:', data);
-    return { success: true };
+let logs = [
+  {
+    visitorType: "Føroyingur",
+    queryType: "Kunning í TK",
+    timestamp: "2025-06-02T14:25:00Z",
+    id: "log1"
+  },
+  {
+    visitorType: "Útlendingur",
+    queryType: "SSL",
+    timestamp: "2025-06-02T15:45:00Z",
+    id: "log2"
+  },
+  {
+    visitorType: "Føroyingur",
+    queryType: "TK Buss",
+    timestamp: "2025-06-03T09:10:00Z",
+    id: "log3"
   }
-}
+];
 
-// Create a singleton instance
-const flowcoreClient = new MockFlowcoreClient();
+let counter = 4;
 
 export async function logVisitorQuery(visitorType: string, queryType: string) {
-  const apiKey = process.env.NEXT_PUBLIC_FLOWCORE_API_KEY;
-  if (!apiKey) {
-    console.error('Flowcore API key is not configured');
-    return { success: false, error: 'API key not configured' };
-  }
-
-  const url = `https://webhook.api.flowcore.io/event/aviajatk/4ca9b13b-c4b9-43f0-9a05-d97ef5215561/visitor-log/visitor-action?key=${apiKey}`;
-  const payload = {
+  const newLog = {
     visitorType,
     queryType,
     timestamp: new Date().toISOString(),
+    id: `log${counter++}`
   };
-
-  console.log('Attempting to log to Flowcore with payload:', payload);
-
-  try {
-    console.log('Sending request to Flowcore...');
-    const response = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(payload),
-    });
-
-    console.log('Flowcore response status:', response.status);
-    const responseText = await response.text();
-    console.log('Flowcore response body:', responseText);
-
-    if (!response.ok) {
-      console.error("Flowcore error response:", responseText);
-      throw new Error(`Failed to log to Flowcore: ${response.status} ${responseText}`);
-    }
-
-    return { success: true };
-  } catch (error) {
-    console.error("Error logging to Flowcore:", error);
-    if (error instanceof TypeError && error.message.includes('fetch')) {
-      console.error('Network error - please check your internet connection and Flowcore service availability');
-    }
-    return { success: false, error: error instanceof Error ? error.message : String(error) };
-  }
+  logs.push(newLog);
+  console.log('[MOCK] Logged:', newLog);
+  await new Promise(resolve => setTimeout(resolve, 200));
+  return { success: true };
 }
 
-// Add read model functionality
-export async function getVisitorLogs(startDate?: string, endDate?: string) {
-  // Simulate visitor log data
-  const logs = [
-    {
-      visitorType: "Føroyingur",
-      queryType: "Kunning í TK",
-      timestamp: "2025-06-02T14:25:00Z",
-      id: "log1"
-    },
-    {
-      visitorType: "Útlendingur",
-      queryType: "SSL",
-      timestamp: "2025-06-02T15:45:00Z",
-      id: "log2"
-    },
-    {
-      visitorType: "Føroyingur",
-      queryType: "TK Buss",
-      timestamp: "2025-06-03T09:10:00Z",
-      id: "log3"
-    }
-  ];
+export async function deleteLastLog() {
+  if (logs.length > 0) {
+    const removed = logs.pop();
+    console.log('[MOCK] Deleted:', removed);
+    return { success: true };
+  }
+  return { success: false, error: 'No logs to delete' };
+}
 
+export async function getVisitorLogs(startDate?: string, endDate?: string) {
   return {
     success: true,
     data: {
@@ -94,7 +57,6 @@ export async function getVisitorLogs(startDate?: string, endDate?: string) {
   };
 }
 
-// Add type for visitor log data
 export interface VisitorLog {
   visitorType: string;
   queryType: string;
@@ -102,10 +64,9 @@ export interface VisitorLog {
   id: string;
 }
 
-// Add type for the read model response
 export interface VisitorLogsResponse {
   logs: VisitorLog[];
   total: number;
   page: number;
   pageSize: number;
-} 
+}
