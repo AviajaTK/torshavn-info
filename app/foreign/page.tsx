@@ -1,172 +1,49 @@
 'use client';
 
+import React from 'react';
 import { useRouter } from 'next/navigation';
-import { logVisitorQuery } from '../utils/flowcore';
-import toast from 'react-hot-toast';
+import { toast } from 'react-hot-toast';
+import { logVisitorInfo } from '@/app/utils/flowcore';
 
 export default function ForeignPage() {
   const router = useRouter();
 
-  const handleButtonClick = async (queryType: string) => {
-    try {
-      const result = await logVisitorQuery('Ferðafólk', queryType);
-      if (result.success) {
-        if (queryType === 'Sletta seinasta input') {
-          toast.success('Input slettað!');
-        } else {
-          toast.success('Loggað!');
-        }
-      } else {
-        toast.error('Feilur við innsending.');
-      }
-    } catch (error) {
-      toast.error('Feilur við innsending.');
-    }
+  const handleClick = async (category: string) => {
+    const entry = { visitorType: 'Útlendingur', category, timestamp: new Date().toISOString() };
+    const res = await logVisitorInfo(entry);
+    if (res.success) toast.success('Loggað!');
+  };
+
+  const handleUndo = () => {
+    toast('Input Slettað!');
+  };
+
+  const handleEnd = () => {
+    router.push('/');
   };
 
   return (
-    <main>
-      <div className="container">
-        <button
-          onClick={() => handleButtonClick('Tax Free')}
-          className="button button-tax-free"
-        >
-          Tax Free
-        </button>
-        <div style={{ height: '1.5rem' }} />
-        <div className="button-grid">
-          <button
-            onClick={() => handleButtonClick('TK Buss')}
-            className="button button-kunning-uttanfyri"
-          >
-            TK Buss
-          </button>
-          <button
-            onClick={() => handleButtonClick('SSL')}
-            className="button button-ssl"
-          >
-            SSL
-          </button>
-          <button
-            onClick={() => handleButtonClick('Kunning í TK')}
-            className="button button-kunning-tk"
-          >
-            Kunning í TK
-          </button>
-          <button
-            onClick={() => handleButtonClick('Kunning uttanfyri TK')}
-            className="button button-kunning-uttanfyri"
-          >
-            Kunning uttanfyri TK
-          </button>
-          <button
-            onClick={() => handleButtonClick('Tiltøk')}
-            className="button button-tiltok"
-          >
-            Tiltøk
-          </button>
-          <button
-            onClick={() => handleButtonClick('Annað')}
-            className="button button-annad"
-          >
-            Annað
-          </button>
-        </div>
-        <div style={{ height: '1.5rem' }} />
-        <div style={{ 
-          display: 'flex', 
-          flexWrap: 'wrap', 
-          gap: '0.5rem', 
-          justifyContent: 'center',
-          padding: '0 1rem'
-        }}>
-          <button
-            onClick={() => handleButtonClick('Børn & Ung (0-17 ár)')}
-            style={{
-              backgroundColor: '#9ab2d6',
-              color: 'black',
-              padding: '0.5rem 1rem',
-              border: 'none',
-              borderRadius: '4px',
-              fontSize: '0.9rem',
-              cursor: 'pointer'
-            }}
-          >
-            Børn & Ung (0-17 ár)
-          </button>
-          <button
-            onClick={() => handleButtonClick('Ung ferðafólk (18-29 ár)')}
-            style={{
-              backgroundColor: '#9ab2d6',
-              color: 'black',
-              padding: '0.5rem 1rem',
-              border: 'none',
-              borderRadius: '4px',
-              fontSize: '0.9rem',
-              cursor: 'pointer'
-            }}
-          >
-            Ung ferðafólk (18-29 ár)
-          </button>
-          <button
-            onClick={() => handleButtonClick('Familjur & Pør (30-44 ár)')}
-            style={{
-              backgroundColor: '#9ab2d6',
-              color: 'black',
-              padding: '0.5rem 1rem',
-              border: 'none',
-              borderRadius: '4px',
-              fontSize: '0.9rem',
-              cursor: 'pointer'
-            }}
-          >
-            Familjur & Pør (30-44 ár)
-          </button>
-          <button
-            onClick={() => handleButtonClick('Empty nesters (45-59 ár)')}
-            style={{
-              backgroundColor: '#9ab2d6',
-              color: 'black',
-              padding: '0.5rem 1rem',
-              border: 'none',
-              borderRadius: '4px',
-              fontSize: '0.9rem',
-              cursor: 'pointer'
-            }}
-          >
-            Empty nesters (45-59 ár)
-          </button>
-          <button
-            onClick={() => handleButtonClick('Eftirlønarferðafólk (60+ ár)')}
-            style={{
-              backgroundColor: '#9ab2d6',
-              color: 'black',
-              padding: '0.5rem 1rem',
-              border: 'none',
-              borderRadius: '4px',
-              fontSize: '0.9rem',
-              cursor: 'pointer'
-            }}
-          >
-            Eftirlønarferðafólk (60+ ár)
-          </button>
-        </div>
-        <div style={{ height: '1.5rem' }} />
-        <div className="button-stack">
-          <button
-            onClick={() => handleButtonClick('Sletta seinasta input')}
-            className="button button-sletta"
-          >
-            Sletta seinasta input
-          </button>
-          <button
-            onClick={() => router.push('/')}
-            className="button button-enda"
-          >
-            Enda
-          </button>
-        </div>
+    <main className="foreign-main">
+      <button className="button button-tax-free wide-btn" onClick={() => handleClick('Tax Free')}>Tax Free</button>
+      <div className="foreign-grid">
+        <button className="button button-tk-buss" onClick={() => handleClick('TK Buss')}>TK Buss</button>
+        <button className="button button-ssl" onClick={() => handleClick('SSL')}>SSL</button>
+        <button className="button button-kunning-tk" onClick={() => handleClick('Kunning í TK')}>Kunning í TK</button>
+        <button className="button button-kunning-uttanfyri" onClick={() => handleClick('Kunning uttanfyri TK')}>Kunning uttanfyri TK</button>
+        <button className="button button-tiltok" onClick={() => handleClick('Tiltøk')}>Tiltøk</button>
+        <button className="button button-annad" onClick={() => handleClick('Annað')}>Annað</button>
       </div>
+      <div className="age-group-row">
+        <button className="button button-age" onClick={() => handleClick('Børn & Ung (0–17 ár)')}>Børn & Ung (0–17 ár)</button>
+        <button className="button button-age" onClick={() => handleClick('Ung ferðafólk (18–29 ár)')}>Ung ferðafólk (18–29 ár)</button>
+        <button className="button button-age" onClick={() => handleClick('Familjur & Pør (30–44 ár)')}>Familjur & Pør (30–44 ár)</button>
+      </div>
+      <div className="age-group-row">
+        <button className="button button-age" onClick={() => handleClick('Empty nesters (45–59 ár)')}>Empty nesters (45–59 ár)</button>
+        <button className="button button-age" onClick={() => handleClick('Eftirlønarfør ferðafólk (60+ ár)')}>Eftirlønarfør ferðafólk (60+ ár)</button>
+      </div>
+      <button className="button button-sletta wide-btn" onClick={handleUndo}>Sletta seinasta input</button>
+      <button className="button button-enda wide-btn" onClick={handleEnd}>Enda</button>
     </main>
   );
 }

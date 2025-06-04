@@ -127,6 +127,24 @@ body {
   background-color: #cc294f;
 }
 
+/* Age group buttons */
+.button-age-0-17,
+.button-age-18-29,
+.button-age-30-44,
+.button-age-45-59,
+.button-age-60 {
+  background-color: #64a7f0;
+  color: black;
+}
+
+.button-age-0-17:hover,
+.button-age-18-29:hover,
+.button-age-30-44:hover,
+.button-age-45-59:hover,
+.button-age-60:hover {
+  background-color: #4b8ed7;
+}
+
 /* Layout */
 .container {
   width: 100%;
@@ -154,4 +172,68 @@ main {
   align-items: center;
   justify-content: center;
   padding: 1rem;
+}
+
+.faroese-main, .foreign-main {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #1a1f35;
+  padding: 2rem 0;
+}
+
+.faroese-grid, .foreign-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  width: 600px;
+}
+
+.wide-btn {
+  width: 600px;
+  margin-bottom: 1.5rem;
+  font-size: 1.25rem;
+}
+
+.button-sletta {
+  margin-bottom: 0.5rem;
+}
+
+.age-group-row {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+}
+
+.button-age {
+  background-color: #b3c6e6;
+  color: black;
+  font-size: 1rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  min-width: 180px;
+  margin-bottom: 0;
+}
+
+.button-age:hover {
+  background-color: #8faed9;
+}
+
+@media (max-width: 700px) {
+  .faroese-grid, .foreign-grid, .wide-btn {
+    width: 100%;
+    min-width: 0;
+  }
+  .wide-btn {
+    font-size: 1rem;
+  }
+  .button-age {
+    min-width: 120px;
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+  }
 }

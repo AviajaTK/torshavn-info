@@ -1,62 +1,39 @@
-'use client'
+'use client';
 
-import { useRouter } from 'next/navigation'
-import { logVisitorQuery, deleteLastLog } from '../utils/flowcore'
-import toast from 'react-hot-toast'
+import React from 'react';
+import { useRouter } from 'next/navigation';
+import { toast } from 'react-hot-toast';
+import { logVisitorInfo } from '@/app/utils/flowcore';
 
 export default function FaroesePage() {
-  const router = useRouter()
+  const router = useRouter();
 
-  const handleLogClick = async (queryType: string) => {
-    const result = await logVisitorQuery('Føroyingur', queryType)
-    if (result.success) {
-      toast.success('Loggað!')
-    } else {
-      toast.error('Feilur við innsending.')
-    }
-  }
+  const handleClick = async (category: string) => {
+    const entry = { visitorType: 'Føroyingur', category, timestamp: new Date().toISOString() };
+    const res = await logVisitorInfo(entry);
+    if (res.success) toast.success('Loggað!');
+  };
 
-  const handleDeleteClick = async () => {
-    const result = await deleteLastLog()
-    if (result.success) {
-      toast.success('Input slettað!')
-    } else {
-      toast.error('Einki at sletta.')
-    }
-  }
+  const handleUndo = () => {
+    toast('Input Slettað!');
+  };
+
+  const handleEnd = () => {
+    router.push('/');
+  };
 
   return (
-    <main>
-      <div className="container">
-        <div className="button-grid">
-          <button onClick={() => handleLogClick('TK Buss')} className="button button-tk-buss">
-            TK Buss
-          </button>
-          <button onClick={() => handleLogClick('Kommunalar Tænastur')} className="button button-kommunalar">
-            Kommunalar Tænastur
-          </button>
-          <button onClick={() => handleLogClick('Kunning í TK')} className="button button-kunning-tk">
-            Kunning í TK
-          </button>
-          <button onClick={() => handleLogClick('Kunning uttanfyri TK')} className="button button-kunning-uttanfyri">
-            Kunning uttanfyri TK
-          </button>
-          <button onClick={() => handleLogClick('Tiltøk')} className="button button-tiltok">
-            Tiltøk
-          </button>
-          <button onClick={() => handleLogClick('Annað')} className="button button-annad">
-            Annað
-          </button>
-        </div>
-        <div className="button-stack">
-          <button onClick={handleDeleteClick} className="button button-sletta">
-            Sletta seinasta input
-          </button>
-          <button onClick={() => router.push('/')} className="button button-enda">
-            Enda
-          </button>
-        </div>
+    <main className="faroese-main">
+      <div className="faroese-grid">
+        <button className="button button-tk-buss" onClick={() => handleClick('TK Buss')}>TK Buss</button>
+        <button className="button button-kommunalar" onClick={() => handleClick('Kommunalar Tænastur')}>Kommunalar Tænastur</button>
+        <button className="button button-kunning-tk" onClick={() => handleClick('Kunning í TK')}>Kunning í TK</button>
+        <button className="button button-kunning-uttanfyri" onClick={() => handleClick('Kunning uttanfyri TK')}>Kunning uttanfyri TK</button>
+        <button className="button button-tiltok" onClick={() => handleClick('Tiltøk')}>Tiltøk</button>
+        <button className="button button-annad" onClick={() => handleClick('Annað')}>Annað</button>
       </div>
+      <button className="button button-sletta wide-btn" onClick={handleUndo}>Sletta seinasta input</button>
+      <button className="button button-enda wide-btn" onClick={handleEnd}>Enda</button>
     </main>
-  )
+  );
 }
