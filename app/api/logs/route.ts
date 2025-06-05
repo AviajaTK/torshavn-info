@@ -1,5 +1,12 @@
 import { NextResponse } from 'next/server';
-import { getVisitorLogs } from '@/app/utils/flowcore';
+import { getLogs } from '@/app/utils/storage';
+
+// In-memory storage for visitor logs (shared with /api/log/route.ts)
+declare const visitorLogs: Array<{
+  visitorType: string;
+  category: string;
+  timestamp: string;
+}>;
 
 export async function GET(request: Request) {
   try {
@@ -7,9 +14,12 @@ export async function GET(request: Request) {
     const startDate = searchParams.get('startDate') || undefined;
     const endDate = searchParams.get('endDate') || undefined;
 
-    const logs = await getVisitorLogs(startDate, endDate);
-    return NextResponse.json(logs);
+    const filteredLogs = getLogs(startDate, endDate);
+    return NextResponse.json(filteredLogs);
   } catch (error) {
-    return NextResponse.json({ error: 'Failed to fetch logs' }, { status: 500 });
+    return NextResponse.json(
+      { error: 'Failed to fetch visitor logs' },
+      { status: 500 }
+    );
   }
 }
