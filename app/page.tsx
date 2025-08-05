@@ -10,10 +10,10 @@ export default function Home() {
       <div className="text-white text-2xl font-bold mb-12">TK Info</div>
       <div className="flex flex-col items-center justify-center gap-8">
         <button className="button button-faroese w-96" onClick={() => router.push('/faroese')}>
-          Føroyingur
+          Borgari
         </button>
         <button className="button button-foreign w-96" onClick={() => router.push('/foreign')}>
-          Útlendingur
+          Ferðafólk
         </button>
       </div>
     </main>
