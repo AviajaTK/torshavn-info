@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { getVisitorLogs } from '@/app/utils/flowcore';
 
 const VISITOR_TYPES = ['All', 'Borgari', 'Ferðafólk'];
 const QUERY_TYPES = [
@@ -20,21 +21,21 @@ const QUERY_TYPES = [
 const fallbackLogs = [
   {
     id: 'log1',
-    visitorType: 'Føroyingur',
-    queryType: 'Kunning í TK',
-    timestamp: '2025-06-02T14:25:00Z',
+    visitorType: 'Borgari',
+    category: 'Kunning í TK',
+    timestamp: '2025-01-27T14:25:00Z',
   },
   {
     id: 'log2',
-    visitorType: 'Útlendingur',
-    queryType: 'SSL',
-    timestamp: '2025-06-02T15:45:00Z',
+    visitorType: 'Ferðafólk',
+    category: 'SSL',
+    timestamp: '2025-01-27T15:45:00Z',
   },
   {
     id: 'log3',
-    visitorType: 'Føroyingur',
-    queryType: 'TK Buss',
-    timestamp: '2025-06-03T09:10:00Z',
+    visitorType: 'Borgari',
+    category: 'TK Buss',
+    timestamp: '2025-01-27T09:10:00Z',
   },
 ];
 
@@ -51,13 +52,9 @@ export default function AdminLogs() {
     setLoading(true);
     setError(null);
     try {
-      const params = new URLSearchParams();
-      if (startDate) params.append('startDate', startDate);
-      if (endDate) params.append('endDate', endDate);
-      const res = await fetch(`/api/logs?${params.toString()}`);
-      const data = await res.json();
-      if (!data.success) throw new Error(data.message);
-      setLogs(data.logs || []);
+      // Use Flowcore function directly instead of local API
+      const data = await getVisitorLogs(startDate, endDate);
+      setLogs(data || []);
     } catch (err) {
       console.warn('Fetch failed, using fallback logs');
       setError('Falling back to offline mode. Showing sample data.');
@@ -75,14 +72,14 @@ export default function AdminLogs() {
   // Filter logs client-side for visitorType and queryType
   const filteredLogs = logs.filter(log =>
     (visitorType === 'All' || log.visitorType === visitorType) &&
-    (queryType === 'All' || log.queryType === queryType)
+    (queryType === 'All' || log.category === queryType)
   );
 
   // Download as CSV
   const downloadCSV = () => {
     const header = 'Visitor Type,Query Type,Timestamp\n';
     const rows = filteredLogs.map(log =>
-      [log.visitorType, log.queryType, new Date(log.timestamp).toLocaleString()].join(',')
+      [log.visitorType, log.category, new Date(log.timestamp).toLocaleString()].join(',')
     );
     const csv = header + rows.join('\n');
     const blob = new Blob([csv], { type: 'text/csv' });
@@ -143,10 +140,10 @@ export default function AdminLogs() {
               <tbody>
                 {filteredLogs.length === 0 ? (
                   <tr><td colSpan={3} style={{ color: 'white', textAlign: 'center', padding: 24 }}>No logs found</td></tr>
-                ) : filteredLogs.map(log => (
-                  <tr key={log.id} style={{ borderBottom: '1px solid #1e40af' }}>
+                ) : filteredLogs.map((log, index) => (
+                  <tr key={log.id || index} style={{ borderBottom: '1px solid #1e40af' }}>
                     <td style={{ color: 'white', padding: 12 }}>{log.visitorType}</td>
-                    <td style={{ color: 'white', padding: 12 }}>{log.queryType}</td>
+                    <td style={{ color: 'white', padding: 12 }}>{log.category}</td>
                     <td style={{ color: 'white', padding: 12 }}>{new Date(log.timestamp).toLocaleString()}</td>
                   </tr>
                 ))}
